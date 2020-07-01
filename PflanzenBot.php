@@ -3,13 +3,18 @@ include(__DIR__ . '/vendor/autoload.php');
 require_once "Stopwatch.php";
 require_once "credentials.php";
 require_once "Antworten.php";
+
 // establish DB connection
 $mysqli = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
+
 if (!empty($mysqli->connect_errno)) {
 	throw new Exception($mysqli->connect_error, $mysqli->connect_errno);
 }
+
 $botAge = round(((date('U') - 1593306539) / 3600), 1);
+
 $bot = new Telegram($bot_token);
+
 $stopwatch = new Stopwatch($mysqli, $bot->ChatID());
 
 if ($stopwatch->isNotSubscribed()) {
