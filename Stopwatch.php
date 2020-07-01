@@ -16,8 +16,8 @@ class Stopwatch {
 	public function watered () {
 
 		$timestamp = time();
-
-		if ($this->hasHousehold()) {
+		$household = $this->getHousehold();
+		if ($household != "") {
 			$household = $this->getHousehold();
 			$query = "
 			UPDATE watering SET timestamp='$timestamp'
@@ -35,26 +35,6 @@ class Stopwatch {
 	}
 
 
-	function hasHousehold () {
-		$query = "
-		SELECT household FROM watering
-		WHERE chat_id = $this->stopwatch_id
-		";
-
-		$result = $this->mysqli->query($query);
-		if (mysqli_num_rows($result) > 0) {
-			while ($row = mysqli_fetch_assoc($result)) {
-				$household = $row['household'];
-			}
-		}
-		if ($household != "") {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-
 	function getHousehold () {
 		$query = "
 		SELECT household FROM watering
@@ -69,6 +49,18 @@ class Stopwatch {
 		}
 
 		return $household;
+	}
+
+
+	public function setHousehold ($household) {
+		$household = $this->mysqli->real_escape_string($household);
+		$query = "
+		INSERT INTO watering (chat_id, household)
+		VALUES ('$this->stopwatch_id', '$household')
+		ON DUPLICATE KEY UPDATE household = '$household'
+		";
+
+		return $this->mysqli->query($query);
 	}
 
 
@@ -98,6 +90,28 @@ class Stopwatch {
 		}
 
 		return $wateringInterval;
+	}
+
+
+	public function setWateringInterval ($wateringInterval) {
+		$wateringInterval = $this->mysqli->real_escape_string($wateringInterval);
+		$household = $this->getHousehold();
+		if ($household != "") {
+
+			$query = "
+			UPDATE watering SET watering_interval='$wateringInterval'
+			WHERE household = '$household';
+			";
+		} else {
+
+			$query = "
+			INSERT INTO watering (chat_id, watering_interval)
+			VALUES ('$this->stopwatch_id', '$wateringInterval')
+			ON DUPLICATE KEY UPDATE watering_interval = '$wateringInterval'
+		";
+		}
+
+		return $this->mysqli->query($query);
 	}
 
 
@@ -132,40 +146,6 @@ class Stopwatch {
 				VALUES ('$this->stopwatch_id', '$timestamp','5','main')
 				ON DUPLICATE KEY UPDATE timestamp = '$timestamp'
 			";
-
-		return $this->mysqli->query($query);
-	}
-
-
-	public function setWateringInterval ($wateringInterval) {
-		$wateringInterval = $this->mysqli->real_escape_string($wateringInterval);
-		$household = $this->getHousehold();
-		if ($household != "") {
-
-			$query = "
-			UPDATE watering SET watering_interval='$wateringInterval'
-			WHERE household = '$household';
-			";
-		} else {
-
-			$query = "
-			INSERT INTO watering (chat_id, watering_interval)
-			VALUES ('$this->stopwatch_id', '$wateringInterval')
-			ON DUPLICATE KEY UPDATE watering_interval = '$wateringInterval'
-		";
-		}
-
-		return $this->mysqli->query($query);
-	}
-
-
-	public function setHousehold ($household) {
-		$household = $this->mysqli->real_escape_string($household);
-		$query = "
-		INSERT INTO watering (chat_id, household)
-		VALUES ('$this->stopwatch_id', '$household')
-		ON DUPLICATE KEY UPDATE household = '$household'
-		";
 
 		return $this->mysqli->query($query);
 	}
