@@ -93,9 +93,11 @@ class Stopwatch {
 		$result = $this->mysqli->query($query);
 		if (mysqli_num_rows($result) > 0) {
 			while ($row = mysqli_fetch_assoc($result)) {
-				return $row['watering_interval'];
+				$wateringInterval = $row['watering_interval'];
 			}
 		}
+
+		return $wateringInterval;
 	}
 
 
