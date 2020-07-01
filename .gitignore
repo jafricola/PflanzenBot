@@ -1,4 +1,6 @@
-credentials.php
-favicon.ico
+.idea/
 logs/
 vendor/
+
+credentials.php
+favicon.ico

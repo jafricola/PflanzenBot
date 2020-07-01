@@ -13,6 +13,28 @@ class Stopwatch {
 	}
 
 
+	public function start () {
+		$timestamp = time();
+		$query = "
+				INSERT INTO watering (chat_id, timestamp,watering_interval,user_state)
+				VALUES ('$this->stopwatch_id', '$timestamp','5','main')
+				ON DUPLICATE KEY UPDATE timestamp = '$timestamp'
+			";
+
+		return $this->mysqli->query($query);
+	}
+
+
+	public function stop () {
+		$query = "
+			DELETE FROM watering
+			WHERE chat_id = '$this->stopwatch_id'
+		";
+
+		return $this->mysqli->query($query);
+	}
+
+
 	public function watered () {
 
 		$timestamp = time();
@@ -138,27 +160,6 @@ class Stopwatch {
 		}
 	}
 
-
-	public function start () {
-		$timestamp = time();
-		$query = "
-				INSERT INTO watering (chat_id, timestamp,watering_interval,user_state)
-				VALUES ('$this->stopwatch_id', '$timestamp','5','main')
-				ON DUPLICATE KEY UPDATE timestamp = '$timestamp'
-			";
-
-		return $this->mysqli->query($query);
-	}
-
-
-	public function stop () {
-		$query = "
-			DELETE FROM watering
-			WHERE chat_id = '$this->stopwatch_id'
-		";
-
-		return $this->mysqli->query($query);
-	}
 
 
 	public function setState ($state) {
