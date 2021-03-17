@@ -13,7 +13,7 @@ if (!empty($mysqli->connect_errno)) {
 
 $botAge = round(((date('U') - 1593306539) / 3600), 1);
 
-$bot = new Telegram($bot_token);
+$bot = new Telegram($telegram_token);
 
 $stopwatch = new Stopwatch($mysqli, $bot->ChatID());
 

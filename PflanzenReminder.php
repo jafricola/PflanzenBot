@@ -9,7 +9,7 @@ if (!empty($mysqli->connect_errno)) {
 	throw new Exception($mysqli->connect_error, $mysqli->connect_errno);
 }
 
-$bot = new Telegram($bot_token);
+$bot = new Telegram($telegram_token);
 
 /**
  * @param $mysqli
