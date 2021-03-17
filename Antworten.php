@@ -32,7 +32,7 @@ Hyperion wurde am 25. August 2006 von den Naturforschern Chris Atkins und Michae
 
     "Hast du Schlafprobleme? Eine Vase mit Gerbera könnte helfen. Die Blume setzt nämlich in der Nacht Sauerstoff frei und erleichtert das Atmen. Besonders bei Allergiebeschwerden kann die Gerbera für einen besseren Schlaf sorgen.",
 
-    "Hast du dich schon mal gefragt, wie die Verdauung bei  Fleischfressende Pflanzen funktioniert?  Die Venusfliegenfalle nutzt zum Beispiel die kleinen Haare auf ihren Blättern, um Insekten zu fangen. Wenn ein Insekt mit diesen Haaren in Kontakt kommt, schlägt die Falle zu und die Pflanze zersetzt ihre Beute anschließend mit Sekreten, die die Insekten auflösen und die Nährstoffe auslösen.",
+    "Hast du dich schon mal gefragt, wie die Verdauung bei Fleischfressende Pflanzen funktioniert? Die Venusfliegenfalle nutzt zum Beispiel die kleinen Haare auf ihren Blättern, um Insekten zu fangen. Wenn ein Insekt mit diesen Haaren in Kontakt kommt, schlägt die Falle zu und die Pflanze zersetzt ihre Beute anschließend mit Sekreten, die die Insekten auflösen und die Nährstoffe auslösen.",
 
     "Die Agave fruchtet nur ein mal in ihrem Leben. Sie wächst für viele Jahre ohne Blüten zu produzieren und kurz nachdem ihre seltene und bis zu 12 Meter hohe Blüte gewachsen ist, stirbt die Pflanze ab.",
 
