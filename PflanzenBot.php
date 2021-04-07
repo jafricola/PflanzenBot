@@ -4,11 +4,25 @@ require_once "Stopwatch.php";
 require_once "credentials.php";
 require_once "Antworten.php";
 
+/**
+ * @var string $dbHost
+ * @var string $dbUser
+ * @var string $dbPass
+ * @var string $dbName
+ * @var string $telegram_token
+ * @var string $chat_id
+ * @var array $wateringPraises
+ * @var array $plantFacts
+ */
+
 // establish DB connection
 $mysqli = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
-
-if (!empty($mysqli->connect_errno)) {
-    throw new Exception($mysqli->connect_error, $mysqli->connect_errno);
+try {
+    if (!empty($mysqli->connect_errno)) {
+        throw new Exception($mysqli->connect_error, $mysqli->connect_errno);
+    }
+} catch (Exception $e) {
+    echo $e->getMessage();
 }
 
 $botAge = round(((date('U') - 1593306539) / 3600), 1);
@@ -39,7 +53,7 @@ if ($stopwatch->getState() == "main") {
             $content = [
                 'chat_id' => $bot->ChatID(),
                 'text' => '
-	Mit /haushalt könnt ihr einen geheimen Zugangscode zu eurem Haushalt eingeben, um euch das Gießen zu teilen.
+	Mit /haushalt könnt ihr einen geheimen Zugangscode zu eurem Haushalt eingeben, um euch das Gießen mit anderen zu teilen.
 Macht diesen Code nicht zu leicht, sonst könnten andere ihn erraten und Teil eures Haushaltes werden.',
             ];
             $bot->sendMessage($content);
